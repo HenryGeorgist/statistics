@@ -10,11 +10,26 @@ package MomentFunctions;
  * @author Will_and_Sara
  */
 public class BasicProductMomentsHistogram extends BasicProductMoments{
+    private int[] _Bins;
+    private double _ExpectedMin;
+    private double _ExpectedMax;
+    public BasicProductMomentsHistogram(int NumBins, double Min, double Max){
+        super();
+        _Bins = new int[NumBins];
+        _ExpectedMin = Min;
+        _ExpectedMax = Max;
+    }
     @Override
     public void AddObservation(double observation){
         super.AddObservation(observation);
         //histogram logic.
-        
+        if(observation < _ExpectedMin){
+            //increase lower bound to include, and add bins
+        }else if(observation>_ExpectedMax){
+            //increase upper bound to include and add bins
+        }
+        int index = _Bins.length * (int)java.lang.Math.floor((observation-_ExpectedMin)/ (_ExpectedMax-_ExpectedMin));
+        _Bins[index]+=1;
     }
     
 }
