@@ -13,7 +13,7 @@ entire array into the object at one time, but gives the programmer access to ske
 The library is split into two major packages Distributions and MomentFunctions.
 
 ##Distributions
-Distributions is a repository for implementations of the abstract class ContinuousDistribution.  Currently Normal, Triangular, and Uniform have been mostly implemented.  On deck for development are Beta, Exponential, Gamma, Gumbel, LogNormal, LogPearsonIII, Rayleigh, TruncatedLogNormal, TruncatedNormal, and Emperical.
+Distributions is a repository for implementations of the abstract class ContinuousDistribution.  Currently Normal, Triangular, Exponential, Gumbel, Rayleigh, and Uniform have been mostly implemented.  On deck for development are Beta, Gamma, LogNormal, LogPearsonIII, TruncatedLogNormal, TruncatedNormal, and Emperical.
 
 ##MomentFunctions
 MomentFunctions is a repository for classes that perform operations on data arrays or streams that describe the data with various typical statistics like mean standard deviation etc.  Not only are method of moments utilized but also Linear moments.  Currently only the inline algorithm for mean and standard deviation has been developed for method of moments (we call it product moments).  In the future skew and Kurtosis will be developed in a Product Moments class.
