@@ -9,6 +9,45 @@ package Distributions;
  *
  * @author Will_and_Sara
  */
-public class Triangular {
+public class Triangular extends ContinuousDistribution{
+    private double _Min;
+    private double _Max;
+    private double _MostLikely;
+    public Triangular(){
+        //_SampleSize = 0;
+        _Min = 0;
+        _Max = 0;
+        _MostLikely = 0;
+    }
+    public Triangular(double min, double max, double mostlikely){
+        //_SampleSize = 0;
+        _Min = min;
+        _Max = max;
+        _MostLikely = mostlikely;
+    }
+    @Override
+    double GetInvCDF(double probability) {
+        double a = _MostLikely - _Min;
+        double b = _Max - _MostLikely;
+        if (probability <= 0){
+            return _Min;
+        }else if(probability < (a/(_Max - _Min))){
+            return _Min + java.lang.Math.sqrt(probability * (_Max - _Min) * a);
+        }else if(probability < 1){
+            return _Max - java.lang.Math.sqrt((1-probability)*(_Max - _Min)* b);
+        }else{
+            return _Max;
+        }
+    }
+
+    @Override
+    double GetCDF(double value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    double GetPDF(double value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
