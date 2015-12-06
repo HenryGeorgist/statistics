@@ -19,6 +19,11 @@ public class BasicProductMomentsHistogram extends BasicProductMoments{
         _ExpectedMin = Min;
         _ExpectedMax = Max;
     }
+//    public BasicProductMomentsHistogram(double binwidth){
+//        //need to change the logic to be based on binwidth....
+//        _Bins = new int[0];
+//        
+//    }
     @Override
     public void AddObservation(double observation){
         super.AddObservation(observation);

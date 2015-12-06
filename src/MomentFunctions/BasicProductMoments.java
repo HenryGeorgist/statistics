@@ -13,7 +13,7 @@ public class BasicProductMoments {
     private double _SampleVariance;
     private double _Min;
     private double _Max;
-    private int _Count;
+    protected int _Count;
     public double GetMean(){return _Mean;}
     public double GetStDev(){return Math.sqrt(_SampleVariance);}
     public double GetMin(){return _Min;}
