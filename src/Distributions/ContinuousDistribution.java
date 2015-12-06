@@ -19,6 +19,85 @@ public abstract class ContinuousDistribution {
     abstract double GetInvCDF(double probability);
     abstract double GetCDF(double value);
     abstract double GetPDF(double value);
+    public String[] GetParamNames(){
+        Field[] flds = this.getClass().getDeclaredFields();
+        String[] ParamNames = new String[flds.length];
+        for(int i = 0; i< flds.length;i++){
+            ParamNames[i] = flds[i].getName();
+        }
+        return ParamNames;
+    }
+    public double[] GetParamValues(){
+        Field[] flds = this.getClass().getDeclaredFields();
+        double[] ParamVals = new double[flds.length];
+        for(int i = 0; i< flds.length;i++){
+            try {
+                ParamVals[i] = flds[i].getDouble(this);
+            } catch (IllegalArgumentException | IllegalAccessException ex) {
+                Logger.getLogger(ContinuousDistribution.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return ParamVals;
+    }
+    // <editor-fold defaultstate="collapsed" desc="Goodness of fit tests">
+    public double Kolmogorov_SmirnovTest(){
+        // need to create a good empirical distribution.
+        return 0;
+    }
+    public double AndersonDarlingTest(){
+        //still need a good emperical distribution.
+        return 0;
+    }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Reflection based utilities, Clone, equals, hash, ReadFromXML, WriteToXML">
+    public ContinuousDistribution Clone(){
+        //create a new continuousdistribution and populate it from this using reflection.
+        ContinuousDistribution Dist = null;
+        Class<?> c;
+        try {
+            c = Class.forName(this.getClass().getName());
+            Dist=(ContinuousDistribution) c.getConstructor().newInstance();
+            Field[] flds = c.getDeclaredFields();
+            for (Field f : flds){
+                f.set(Dist,f.getDouble(this));
+            }
+        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(ContinuousDistribution.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Dist;
+    }
+    @Override
+    public boolean equals(Object dist){
+        if(dist.getClass().getName().equals(this.getClass().getName())){
+            double[] thisParamValues = this.GetParamValues();
+            ContinuousDistribution those = (ContinuousDistribution) dist;
+            double[] thoseParamValues = those.GetParamValues();
+            if(thisParamValues.length == thoseParamValues.length){
+                for(int i = 0; i<thisParamValues.length;i++){
+                    if(thisParamValues[i] != thoseParamValues[i]){
+                        return false;
+                    }
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public int hashCode() {
+        // how do i convert all double parameters into an integer representation?
+        int hash = this.getClass().getName().hashCode();
+        double[] vals = this.GetParamValues();
+        Double d;
+        for(int i = 0;i<vals.length; i++){
+            d = vals[i];
+            hash += d.hashCode();
+        }
+        return hash;
+    }
     public ContinuousDistribution ReadFromXML(Element ele) {
             ContinuousDistribution Dist = null;
             Class<?> c;
@@ -55,4 +134,5 @@ public abstract class ContinuousDistribution {
         }
         return null;
     }
+    // </editor-fold>
 }
