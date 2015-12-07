@@ -26,7 +26,7 @@ public class Triangular extends ContinuousDistribution{
         _MostLikely = mostlikely;
     }
     @Override
-    double GetInvCDF(double probability) {
+    public double GetInvCDF(double probability) {
         double a = _MostLikely - _Min;
         double b = _Max - _MostLikely;
         if (probability <= 0){
@@ -41,12 +41,12 @@ public class Triangular extends ContinuousDistribution{
     }
 
     @Override
-    double GetCDF(double value) {
+    public double GetCDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    double GetPDF(double value) {
+    public double GetPDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

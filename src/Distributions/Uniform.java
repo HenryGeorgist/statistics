@@ -30,12 +30,12 @@ public class Uniform extends ContinuousDistribution{
         //_Max = BPM.GetMean() + dist;
     }
     @Override
-    double GetInvCDF(double probability) {
+    public double GetInvCDF(double probability) {
         return _Min + ((_Max - _Min)* probability);
     }
 
     @Override
-    double GetCDF(double value) {
+    public double GetCDF(double value) {
         if(value<_Min){
             return 0;
         }else if(value <=_Max){
@@ -46,7 +46,7 @@ public class Uniform extends ContinuousDistribution{
     }
 
     @Override
-    double GetPDF(double value) {
+    public double GetPDF(double value) {
         if(value < _Min){
             return 0;
         }else if(value <= _Max){

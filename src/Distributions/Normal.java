@@ -38,7 +38,7 @@ public class Normal extends ContinuousDistribution {
         _StDev = bpm.GetStDev();
     }
     @Override
-    double GetInvCDF(double probability) {
+    public double GetInvCDF(double probability) {
         int i;
         double x;
         double c0 = 2.515517;
@@ -62,11 +62,11 @@ public class Normal extends ContinuousDistribution {
         return (x*_StDev)+_Mean;
     }
     @Override
-    double GetCDF(double value) {
+    public double GetCDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override
-    double GetPDF(double value) {
+    public double GetPDF(double value) {
         return (1/Math.sqrt(2*Math.PI)*Math.pow(_StDev,2.0))*Math.exp((-(Math.pow(value-_Mean, 2)/(2*Math.pow(_StDev, 2)))));
     }
 }

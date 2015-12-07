@@ -19,15 +19,15 @@ public class Rayleigh extends ContinuousDistribution{
         _Sigma = BPM.GetStDev();
     }
     @Override
-    double GetInvCDF(double probability) {
+    public double GetInvCDF(double probability) {
         return _Sigma * java.lang.Math.sqrt(-2*java.lang.Math.log(probability));
     }
     @Override
-    double GetCDF(double value) {
+    public double GetCDF(double value) {
         return 1-(java.lang.Math.exp(-(java.lang.Math.pow(value, 2))/(2*(java.lang.Math.pow(_Sigma,2)))));
     }
     @Override
-    double GetPDF(double value) {
+    public double GetPDF(double value) {
         return (value/(java.lang.Math.pow(_Sigma, 2)))* java.lang.Math.exp(-(java.lang.Math.pow(value, 2))/(2*(java.lang.Math.pow(_Sigma,2))));
     }
     

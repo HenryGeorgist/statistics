@@ -28,7 +28,7 @@ public class LogPearsonIII extends ContinuousDistribution{
         _Skew = PM.GetSkew();
     }
     @Override
-    double GetInvCDF(double probability) {
+    public double GetInvCDF(double probability) {
         Normal sn = new Normal();
         double z = sn.GetInvCDF(probability);
         double k = (2/_Skew)*(java.lang.Math.pow(((z-_Skew)/6)* _Skew/6+1,3)-1);
@@ -36,11 +36,11 @@ public class LogPearsonIII extends ContinuousDistribution{
         return java.lang.Math.pow(10, logflow);
     }
     @Override
-    double GetCDF(double value) {
+    public double GetCDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override
-    double GetPDF(double value) {
+    public double GetPDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

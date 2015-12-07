@@ -19,15 +19,15 @@ public class Exponential extends ContinuousDistribution{
         _Lambda = 1/BPM.GetMean();
     }
     @Override
-    double GetInvCDF(double probability) {
+    public double GetInvCDF(double probability) {
         return java.lang.Math.log(probability)/_Lambda;
     }
     @Override
-    double GetCDF(double value) {
+    public double GetCDF(double value) {
         return 1- java.lang.Math.exp(-_Lambda*value);
     }
     @Override
-    double GetPDF(double value) {
+    public double GetPDF(double value) {
         if(value<0){
             return 0;
         }else{

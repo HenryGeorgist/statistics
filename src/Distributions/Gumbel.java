@@ -26,15 +26,15 @@ public class Gumbel extends ContinuousDistribution{
         _Mu = BPM.GetMean()-_Beta*0.57721566490153287;
     }
     @Override
-    double GetInvCDF(double probability) {
+    public double GetInvCDF(double probability) {
         return (_Mu-(_Beta*(java.lang.Math.log(java.lang.Math.log(probability)))));
     }
     @Override
-    double GetCDF(double value) {
+    public double GetCDF(double value) {
         return java.lang.Math.exp(-java.lang.Math.exp(-(value-_Mu)/_Beta));
     }
     @Override
-    double GetPDF(double value) {
+    public double GetPDF(double value) {
         double z = (value-_Mu)/_Beta;
         return (1/_Beta)*java.lang.Math.exp(-(z+java.lang.Math.exp(-z)));
     }

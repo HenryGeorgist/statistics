@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/MomentFunctions/BasicProductMomentsHistogram.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/Distributions/Triangular.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/Distributions/Rayleigh.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/MomentFunctions/BasicProductMoments.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/Distributions/LogPearsonIII.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/Distributions/ContinuousDistribution.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/MomentFunctions/LinearMoments.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/Distributions/Uniform.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/Distributions/Gumbel.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/Distributions/Exponential.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/MomentFunctions/ProductMoments.java</file>
+        </group>
     </open-files>
 </project-private>

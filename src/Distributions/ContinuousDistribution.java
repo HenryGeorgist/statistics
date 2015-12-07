@@ -16,9 +16,9 @@ import javax.xml.parsers.ParserConfigurationException;
  * @author Will_and_Sara
  */
 public abstract class ContinuousDistribution {
-    abstract double GetInvCDF(double probability);
-    abstract double GetCDF(double value);
-    abstract double GetPDF(double value);
+    public abstract double GetInvCDF(double probability);
+    public abstract double GetCDF(double value);
+    public abstract double GetPDF(double value);
     public String[] GetParamNames(){
         Field[] flds = this.getClass().getDeclaredFields();
         String[] ParamNames = new String[flds.length];
