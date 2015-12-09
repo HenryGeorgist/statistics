@@ -13,6 +13,7 @@ public class BasicProductMomentsHistogram extends BasicProductMoments{
     private int[] _Bins;
     private double _ExpectedMin;
     private double _ExpectedMax;
+    public int[] Bins(){return _Bins;}
     public BasicProductMomentsHistogram(int NumBins, double Min, double Max){
         super();
         _Bins = new int[NumBins];

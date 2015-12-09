@@ -64,6 +64,12 @@ public class BasicProductMoments {
         }
         TestForConvergence();
     }
+    public void AddObservations(double[] data){
+        for(double d : data){
+            AddObservation(d);
+        }
+    }
+            
     private void TestForConvergence(){
         if(_Count>_MinValuesBeforeConvergenceTest){
             if(!_Converged){
