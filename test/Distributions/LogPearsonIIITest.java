@@ -31,7 +31,7 @@ public class LogPearsonIIITest {
     
     @Before
     public void setUp() {
-        _LPII = new LogPearsonIII(5,1,1);
+        _LPII = new LogPearsonIII(5,1,1,0);
     }
     
     @After
