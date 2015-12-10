@@ -55,17 +55,23 @@ public class LogPearsonIII extends ContinuousDistribution{
     }
     public double Bullentin17BConfidenceLimit(double probability, double alphaValue){
         Normal sn = new Normal(0,1);
-        double k = GetInvCDF(probability);
+        double z1 =sn.GetInvCDF(probability);
+        double k = 0; 
+        if(_Skew == 0){
+            k = z1;
+        }else{
+            k = (2/_Skew)*(java.lang.Math.pow((z1-_Skew/6.0)* _Skew/6.0+1,3)-1);
+        }
         double z = sn.GetInvCDF(alphaValue);
         double zSquared = java.lang.Math.pow(z, 2);
         double kSquared = java.lang.Math.pow(k, 2);
-        double Avalue = (1-((zSquared)/(2*(_SampleSize-1))));
+        double Avalue = (1-(zSquared)/2/(_SampleSize-1));
         double Bvalue = (kSquared) - ((zSquared)/_SampleSize);
         double RootValue = java.lang.Math.sqrt(kSquared-(Avalue*Bvalue));
         if(alphaValue>.5){
-            return _Mean + (((k + RootValue)/Avalue)*_StDev);
+            return java.lang.Math.pow(10,_Mean + _StDev*(k + RootValue)/Avalue);
         }else{
-            return _Mean + (((k - RootValue)/Avalue)*_StDev);
+            return java.lang.Math.pow(10,_Mean + _StDev*(k - RootValue)/Avalue);
         }
     }
 }
