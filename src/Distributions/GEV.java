@@ -20,17 +20,33 @@ public class GEV extends ContinuousDistribution{
     }
     @Override
     public double GetInvCDF(double probability) {
+        if(probability<=0){
+            if(_Xi>0){
+                return _Mu-_Sigma/_Xi;
+            }else{
+                return Double.NEGATIVE_INFINITY;
+            }
+        }else if(probability>=1){
+            if(_Xi<0){
+                return _Mu-_Sigma/_Xi;
+            }else{
+                return Double.POSITIVE_INFINITY;
+            }
+        }
         return Tinv(probability);
     }
-
     @Override
     public double GetCDF(double value) {
         //check support.
+        if(_Xi>0 && value <= _Mu-_Sigma/_Xi){return 0;}
+        if(_Xi<0 && value >= _Mu-_Sigma/_Xi){return 1;}
         return java.lang.Math.exp(-T(value));
     }
 
     @Override
     public double GetPDF(double value) {
+        if(_Xi>0 && value <= _Mu-_Sigma/_Xi){return 0;}
+        if(_Xi<0 && value >= _Mu-_Sigma/_Xi){return 0;}
         double tx = T(value);
         return (1/_Sigma)*java.lang.Math.pow(tx, _Xi+1)*java.lang.Math.exp(-tx);
     }
@@ -43,9 +59,9 @@ public class GEV extends ContinuousDistribution{
     }
     private double Tinv(double probability){
         if(_Xi!=0){
-            return _Mu-_Sigma*java.lang.Math.log(java.lang.Math.log(1/probability));
-        }else{
             return _Mu-_Sigma*(java.lang.Math.pow(java.lang.Math.log(1/probability), _Xi)-1)/_Xi;
+        }else{
+            return _Mu-_Sigma*java.lang.Math.log(java.lang.Math.log(1/probability));
         }
     }
 }
