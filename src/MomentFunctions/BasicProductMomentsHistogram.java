@@ -30,9 +30,17 @@ public class BasicProductMomentsHistogram extends BasicProductMoments{
         super.AddObservation(observation);
         //histogram logic.
         if(observation < _ExpectedMin){
-            //increase lower bound to include, and add bins
-        }else if(observation>_ExpectedMax){
+            double binwidth = (_ExpectedMin - _ExpectedMin)/_Bins.length;
+            int overdist = (int)java.lang.Math.ceil(-(observation-_ExpectedMin)/binwidth);
+            _ExpectedMin = _ExpectedMin - overdist*binwidth;
+            int[] tmparray = new int[_Bins.length + overdist-1];
+            for(int i = overdist; i<_Bins.length;i++){
+                tmparray[i] = _Bins[i];
+            }
+            _Bins = tmparray;
+            }else if(observation>_ExpectedMax){
             //increase upper bound to include and add bins
+                //there is no equivalent to redim preserve, so i must do something like the lower end.
         }
         int index = _Bins.length * (int)java.lang.Math.floor((observation-_ExpectedMin)/ (_ExpectedMax-_ExpectedMin));
         _Bins[index]+=1;
