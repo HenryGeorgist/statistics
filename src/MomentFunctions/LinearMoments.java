@@ -5,6 +5,8 @@
  */
 package MomentFunctions;
 
+import java.util.Collections;
+
 /**
  *
  * @author Will_and_Sara
@@ -18,8 +20,7 @@ public class LinearMoments {
     private double _Max;
     private double _Min;
     public LinearMoments(double data[]){
-        //sort the data..
-        //i dont know how to sort arrays in java yet.
+        java.util.Arrays.sort(data);//sorts ascending based on javadocs
         _Count = data.length;
         _Min = data[0];
         _Max = data[_Count-1];
