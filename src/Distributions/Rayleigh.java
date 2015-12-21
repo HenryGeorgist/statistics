@@ -11,6 +11,7 @@ package Distributions;
  */
 public class Rayleigh extends ContinuousDistribution{
     private double _Sigma;
+    public double GetSigma(){return _Sigma;}
     public Rayleigh(double sigma){
         _Sigma = sigma;
     }
@@ -30,5 +31,4 @@ public class Rayleigh extends ContinuousDistribution{
     public double GetPDF(double value) {
         return (value/(java.lang.Math.pow(_Sigma, 2)))* java.lang.Math.exp(-(java.lang.Math.pow(value, 2))/(2*(java.lang.Math.pow(_Sigma,2))));
     }
-    
 }

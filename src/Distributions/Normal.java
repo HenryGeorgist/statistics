@@ -12,6 +12,8 @@ package Distributions;
 public class Normal extends ContinuousDistribution {
     public double _Mean;
     public double _StDev;
+    public double GetMean(){return _Mean;}
+    public double GetStDev(){return _StDev;}
     /**
      *Creates a standard normal distribution
      */
@@ -29,7 +31,7 @@ public class Normal extends ContinuousDistribution {
         _StDev = sd;
     }
     /**
-     *Creates a normal distribution.
+     *Creates a normal distribution based on input data using the standard method of moments.
      * @param data an array of double data.
      */
     public Normal(double[] data){
@@ -63,6 +65,7 @@ public class Normal extends ContinuousDistribution {
     }
     @Override
     public double GetCDF(double value) {
+        //decide which method i want to use.  errfunction, the method i came up with in vb, or 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override

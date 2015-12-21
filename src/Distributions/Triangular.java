@@ -13,6 +13,9 @@ public class Triangular extends ContinuousDistribution{
     private double _Min;
     private double _Max;
     private double _MostLikely;
+    public double GetMin(){return _Min;}
+    public double GetMax(){return _Max;}
+    public double GetMostLikely(){return _MostLikely;}
     public Triangular(){
         //_SampleSize = 0;
         _Min = 0;
@@ -39,15 +42,12 @@ public class Triangular extends ContinuousDistribution{
             return _Max;
         }
     }
-
     @Override
     public double GetCDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public double GetPDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

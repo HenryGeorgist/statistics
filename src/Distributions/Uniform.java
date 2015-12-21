@@ -12,6 +12,8 @@ package Distributions;
 public class Uniform extends ContinuousDistribution{
     private double _Min;
     private double _Max;
+    public double GetMin(){return _Min;}
+    public double GetMax(){return _Max;}
     public Uniform(){
         _Min = 0;
         _Max = 0;
@@ -33,7 +35,6 @@ public class Uniform extends ContinuousDistribution{
     public double GetInvCDF(double probability) {
         return _Min + ((_Max - _Min)* probability);
     }
-
     @Override
     public double GetCDF(double value) {
         if(value<_Min){
@@ -44,7 +45,6 @@ public class Uniform extends ContinuousDistribution{
             return 1;
         }
     }
-
     @Override
     public double GetPDF(double value) {
         if(value < _Min){
