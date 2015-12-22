@@ -5,6 +5,7 @@
  */
 package Distributions;
 
+import Distributions.MethodOfMoments.Normal;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

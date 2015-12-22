@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Distributions;
+package Distributions.MethodOfMoments;
+
+import Distributions.ContinuousDistribution;
 
 /**
  *
@@ -23,12 +25,10 @@ public class LogNormal extends ContinuousDistribution{
         Normal z = new Normal(_Mean,_StDev);
         return java.lang.Math.pow(10,z.GetInvCDF(probability));
     }
-
     @Override
     public double GetCDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public double GetPDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

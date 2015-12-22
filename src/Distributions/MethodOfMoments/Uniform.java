@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Distributions;
+package Distributions.MethodOfMoments;
+
+import Distributions.ContinuousDistribution;
 
 /**
  *
@@ -26,6 +28,7 @@ public class Uniform extends ContinuousDistribution{
         MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(data);
         _Min = BPM.GetMin();
         _Max = BPM.GetMax();
+        SetPeriodOfRecord(BPM.GetSampleSize());
         //alternative method
         //double dist = java.lang.Math.sqrt(3*BPM.GetSampleVariance());
         //_Min = BPM.GetMean() - dist;

@@ -22,12 +22,12 @@ public class BasicProductMoments {
     public double GetStDev(){return Math.sqrt(_SampleVariance);}
     public double GetMin(){return _Min;}
     public double GetMax(){return _Max;}
-    public int GetCount(){return _Count;}
+    public int GetSampleSize(){return _Count;}
     public boolean IsConverged(){return _Converged;}
     public void SetMinValuesBeforeConvergenceTest(int numobservations){_MinValuesBeforeConvergenceTest = numobservations;}
     public void SetConvergenceTolerance(double tolerance){_ToleranceForConvergence = tolerance;}
     public void SetZAlphaForConvergence(double ConfidenceInterval){
-        Distributions.Normal sn = new Distributions.Normal();
+        Distributions.MethodOfMoments.Normal sn = new Distributions.MethodOfMoments.Normal();
         _ZAlphaForConvergence = sn.GetInvCDF(ConfidenceInterval +((1-ConfidenceInterval)/2));
     }
     public BasicProductMoments(){

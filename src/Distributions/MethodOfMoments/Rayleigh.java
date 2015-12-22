@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Distributions;
+package Distributions.MethodOfMoments;
+
+import Distributions.ContinuousDistribution;
 
 /**
  *
@@ -18,6 +20,7 @@ public class Rayleigh extends ContinuousDistribution{
     public Rayleigh(double[] data){
         MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(data);
         _Sigma = BPM.GetStDev();
+        SetPeriodOfRecord(BPM.GetSampleSize());
     }
     @Override
     public double GetInvCDF(double probability) {

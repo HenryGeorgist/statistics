@@ -47,4 +47,25 @@ public class SpecialFunctions {
         }
         return ret;
     }
+    public static double gammaln(double x){
+        if(x<=0){return Double.NaN;}
+        double[] c = new double[6];
+        c[0] = 76.180091729471457;
+        c[1] = -86.505320329416776;
+        c[2] = 24.014098240830911;
+        c[3] = -1.231739572450155;
+        c[4] = 0.001208650973866179;
+        c[5] = -0.000005395239384953;
+        double tmp = x+5.5;
+        tmp = (x+0.5)*java.lang.Math.log(tmp)-tmp;
+        double err = 1.0000000001900149;
+        for(int i = 0; i<5;i++){
+            err += c[i]/(x+i+1);
+        }
+        return tmp + java.lang.Math.log(java.lang.Math.sqrt(java.lang.Math.PI*2) * err / x);
+    }
+    public double BetaFunction(double a, double b){
+        return java.lang.Math.exp(gammaln(a)+gammaln(b)-gammaln(a-b));
+    }
+    
 }

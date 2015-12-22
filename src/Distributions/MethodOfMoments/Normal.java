@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Distributions;
+package Distributions.MethodOfMoments;
+
+import Distributions.ContinuousDistribution;
 
 /**
  *
@@ -38,6 +40,7 @@ public class Normal extends ContinuousDistribution {
         MomentFunctions.BasicProductMoments bpm = new MomentFunctions.BasicProductMoments(data);
         _Mean = bpm.GetMean();
         _StDev = bpm.GetStDev();
+        SetPeriodOfRecord(bpm.GetSampleSize());
     }
     @Override
     public double GetInvCDF(double probability) {

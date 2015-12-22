@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Distributions;
+package Distributions.MethodOfMoments;
+
+import Distributions.ContinuousDistribution;
 
 /**
  *
@@ -17,6 +19,7 @@ public class Exponential extends ContinuousDistribution{
     public Exponential(double[] data){
         MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(data);
         _Lambda = 1/BPM.GetMean();
+        SetPeriodOfRecord(BPM.GetSampleSize());
     }
     @Override
     public double GetInvCDF(double probability) {

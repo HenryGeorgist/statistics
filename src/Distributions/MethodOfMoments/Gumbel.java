@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Distributions;
+package Distributions.MethodOfMoments;
+
+import Distributions.ContinuousDistribution;
 
 /**
  *
@@ -24,6 +26,7 @@ public class Gumbel extends ContinuousDistribution{
         MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(data);
         _Beta = java.lang.Math.PI/(BPM.GetStDev()*java.lang.Math.sqrt(6));
         _Mu = BPM.GetMean()-_Beta*0.57721566490153287;
+        SetPeriodOfRecord(BPM.GetSampleSize());
     }
     @Override
     public double GetInvCDF(double probability) {
@@ -37,6 +40,5 @@ public class Gumbel extends ContinuousDistribution{
     public double GetPDF(double value) {
         double z = (value-_Mu)/_Beta;
         return (1/_Beta)*java.lang.Math.exp(-(z+java.lang.Math.exp(-z)));
-    }
-    
+    } 
 }

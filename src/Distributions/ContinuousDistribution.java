@@ -16,29 +16,12 @@ import javax.xml.parsers.ParserConfigurationException;
  * @author Will_and_Sara
  */
 public abstract class ContinuousDistribution {
+    private int _PeriodOfRecord = 0;
     public abstract double GetInvCDF(double probability);
     public abstract double GetCDF(double value);
     public abstract double GetPDF(double value);
-    public String[] GetParamNames(){
-        Field[] flds = this.getClass().getDeclaredFields();
-        String[] ParamNames = new String[flds.length];
-        for(int i = 0; i< flds.length;i++){
-            ParamNames[i] = flds[i].getName();
-        }
-        return ParamNames;
-    }
-    public double[] GetParamValues(){
-        Field[] flds = this.getClass().getDeclaredFields();
-        double[] ParamVals = new double[flds.length];
-        for(int i = 0; i< flds.length;i++){
-            try {
-                ParamVals[i] = flds[i].getDouble(this);
-            } catch (IllegalArgumentException | IllegalAccessException ex) {
-                Logger.getLogger(ContinuousDistribution.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return ParamVals;
-    }
+    public int GetPeriodOfRecord(){return _PeriodOfRecord;}
+    public void SetPeriodOfRecord(int POR){_PeriodOfRecord = POR;}
     // <editor-fold defaultstate="collapsed" desc="Goodness of fit tests">
     public double Kolmogorov_SmirnovTest(){
         // need to create a good empirical distribution.
@@ -49,7 +32,34 @@ public abstract class ContinuousDistribution {
         return 0;
     }
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Reflection based utilities, Clone, equals, hash, ReadFromXML, WriteToXML">
+    // <editor-fold defaultstate="collapsed" desc="Reflection based utilities, GetParamNames, GetParamValues, Clone, equals, hash, ReadFromXML, WriteToXML">
+        public String[] GetParamNames(){
+        Field[] flds = this.getClass().getDeclaredFields();
+        String[] ParamNames = new String[flds.length];
+        for(int i = 0; i< flds.length;i++){
+            ParamNames[i] = flds[i].getName();
+        }
+        return ParamNames;
+    }
+    public Object[] GetParamValues(){
+        Field[] flds = this.getClass().getDeclaredFields();
+        Object[] ParamVals = new Object[flds.length];
+        for(int i = 0; i< flds.length;i++){
+            try {
+                switch(flds[i].getType().getName()){
+                    case "double":
+                        ParamVals[i] = flds[i].getDouble(this);
+                        break;
+                    case "int":
+                        ParamVals[i] = flds[i].getInt(this);
+                    default:
+                }   
+            } catch (IllegalArgumentException | IllegalAccessException ex) {
+                Logger.getLogger(ContinuousDistribution.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return ParamVals;
+    }
     public ContinuousDistribution Clone(){
         //create a new continuousdistribution and populate it from this using reflection.
         ContinuousDistribution Dist = null;
@@ -59,7 +69,16 @@ public abstract class ContinuousDistribution {
             Dist=(ContinuousDistribution) c.getConstructor().newInstance();
             Field[] flds = c.getDeclaredFields();
             for (Field f : flds){
-                f.set(Dist,f.getDouble(this));
+                switch(f.getType().getName()){
+                    case "double":
+                        f.set(Dist,f.getDouble(this));
+                        break;
+                    case "int":
+                        f.set(Dist,f.getInt(this));
+                        break;
+                    default:
+                        break;
+                }
             }
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(ContinuousDistribution.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,9 +88,9 @@ public abstract class ContinuousDistribution {
     @Override
     public boolean equals(Object dist){
         if(dist.getClass().getName().equals(this.getClass().getName())){
-            double[] thisParamValues = this.GetParamValues();
+            Object[] thisParamValues = this.GetParamValues();
             ContinuousDistribution those = (ContinuousDistribution) dist;
-            double[] thoseParamValues = those.GetParamValues();
+            Object[] thoseParamValues = those.GetParamValues();
             if(thisParamValues.length == thoseParamValues.length){
                 for(int i = 0; i<thisParamValues.length;i++){
                     if(thisParamValues[i] != thoseParamValues[i]){
@@ -88,13 +107,10 @@ public abstract class ContinuousDistribution {
     }
     @Override
     public int hashCode() {
-        // how do i convert all double parameters into an integer representation?
         int hash = this.getClass().getName().hashCode();
-        double[] vals = this.GetParamValues();
-        Double d;
+        Object[] vals = this.GetParamValues();
         for(int i = 0;i<vals.length; i++){
-            d = vals[i];
-            hash += d.hashCode();
+            hash += vals[i].hashCode();
         }
         return hash;
     }
@@ -106,7 +122,17 @@ public abstract class ContinuousDistribution {
             Dist=(ContinuousDistribution) c.getConstructor().newInstance();
             Field[] flds = c.getDeclaredFields();
             for (Field f : flds){
-                f.set(Dist,Double.parseDouble(ele.getAttribute(f.getName())));
+                switch(f.getType().getName()){
+                    case "double":
+                        f.set(Dist,Double.parseDouble(ele.getAttribute(f.getName())));
+                        break;
+                    case "int":
+                        f.set(Dist,Integer.parseInt(ele.getAttribute(f.getName())));
+                        break;
+                    default:
+                        //throw error?
+                        break;
+                }   
             }
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(ContinuousDistribution.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,7 +149,16 @@ public abstract class ContinuousDistribution {
             Element ele = doc.createElement(this.getClass().getName());
             for (Field f : flds) {
             try {
-                ele.setAttribute(f.getName(),Double.toString(f.getDouble(this)));
+                switch(f.getType().getName()){
+                    case "double":
+                        ele.setAttribute(f.getName(),Double.toString(f.getDouble(this)));
+                        break;
+                    case "int":
+                        ele.setAttribute(f.getName(),Integer.toString(f.getInt(this)));
+                        break;
+                    default:
+                        break;
+                }
                 } catch (IllegalArgumentException | IllegalAccessException ex) {
                     Logger.getLogger(ContinuousDistribution.class.getName()).log(Level.SEVERE, null, ex);
                 }

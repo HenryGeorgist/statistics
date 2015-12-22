@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Distributions;
+package Distributions.MethodOfMoments;
+
+import Distributions.ContinuousDistribution;
 
 /**
  *
@@ -37,7 +39,6 @@ public class GEV extends ContinuousDistribution{
     }
     @Override
     public double GetCDF(double value) {
-        //check support.
         if(_Xi>0 && value <= _Mu-_Sigma/_Xi){return 0;}
         if(_Xi<0 && value >= _Mu-_Sigma/_Xi){return 1;}
         return java.lang.Math.exp(-T(value));
