@@ -48,7 +48,12 @@ public class LogPearsonIII extends Distributions.ContinuousDistribution{
     }
     @Override
     public double GetCDF(double value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 1 - (SpecialFunctions.SpecialFunctions.IncompleteGamma(_Alpha, ((_Xi - value) / _Beta)) / Math.exp(SpecialFunctions.SpecialFunctions.gammaln(_Alpha)));
+//        If _gamma < 0 Then
+//            Return 1 - (incompletegammalower(_alpha, ((_xi - value) / _beta)) / Math.Exp(gammaln(_alpha)))
+//        Else
+//            Return (incompletegammalower(_alpha, ((value - _xi) / _beta)) / Math.Exp(gammaln(_alpha)))
+//        End If
     }
     @Override
     public double GetPDF(double value) {
