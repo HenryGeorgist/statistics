@@ -170,4 +170,20 @@ public abstract class ContinuousDistribution {
         return null;
     }
     // </editor-fold>
+    public double[] BootStrap(){
+        double[] result = new double[_PeriodOfRecord];
+        java.util.Random Random = new java.util.Random();
+        for(int i = 0; i<_PeriodOfRecord;i++){
+            result[i] = GetInvCDF(Random.nextDouble());
+        }
+        return result;
+    }
+    public double[] BootStrap(long seed){
+        double[] result = new double[_PeriodOfRecord];
+        java.util.Random Random = new java.util.Random(seed);
+        for(int i = 0; i<_PeriodOfRecord;i++){
+            result[i] = GetInvCDF(Random.nextDouble());
+        }
+        return result;
+    }
 }
