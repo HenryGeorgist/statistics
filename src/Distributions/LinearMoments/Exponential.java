@@ -18,6 +18,10 @@ public class Exponential extends Distributions.ContinuousDistribution{
         _Xi = LM.GetL1() - _Alpha;
         SetPeriodOfRecord(LM.GetSampleSize());
     }
+    public Exponential(double Alpha, double Xi){
+        _Alpha = Alpha;
+        _Xi = Xi;
+    }
     @Override
     public double GetInvCDF(double probability) {
         return _Xi - _Alpha * java.lang.Math.log(1 - probability);

@@ -3,25 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/Triangular.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/LinearMoments/Logistic.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/ContinuousDistribution.java</file>
-            <file>file:/C:/Software/Statistics/src/MomentFunctions/BasicProductMoments.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/LinearMoments/Exponential.java</file>
-            <file>file:/C:/Software/Statistics/src/SpecialFunctions/SpecialFunctions.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/LinearMoments/GEV.java</file>
-            <file>file:/C:/Software/Statistics/src/MomentFunctions/ProductMoments.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/LogNormal.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/GEV.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/Gumbel.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/LogPearsonIII.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/LinearMoments/LogPearsonIII.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/Exponential.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/LinearMoments/Pareto.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/LinearMoments/Gumbel.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/Normal.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/Uniform.java</file>
-            <file>file:/C:/Software/Statistics/src/Distributions/MethodOfMoments/Rayleigh.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/MomentFunctions/BasicProductMomentsHistogram.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/MomentFunctions/BasicProductMoments.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/Distributions/ContinuousDistribution.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/MomentFunctions/LinearMoments.java</file>
+            <file>file:/Users/Will_and_Sara/NetBeansProjects/Statistics/src/MomentFunctions/ProductMoments.java</file>
         </group>
     </open-files>
 </project-private>

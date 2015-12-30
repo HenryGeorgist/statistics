@@ -19,9 +19,15 @@ public class Pareto extends Distributions.ContinuousDistribution{
             _K = (1 - 3 * LM.GetT3()) / (1 + LM.GetT3());
             _Alpha = (1 + _K) * (2 + _K) * LM.GetL2();
             _Xi = LM.GetL1() - (2 + _K) * LM.GetL2();
+            SetPeriodOfRecord(LM.GetSampleSize());
         }else{
             //coefficient of variation cannot be zero.
         }
+    }
+    public Pareto(double K, double Alpha, double Xi){
+        _K = K;
+        _Alpha = Alpha;
+        _Xi = Xi;
     }
     @Override
     public double GetInvCDF(double probability) {

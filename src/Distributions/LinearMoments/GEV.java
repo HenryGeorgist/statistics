@@ -53,6 +53,11 @@ public class GEV extends Distributions.ContinuousDistribution{
             _Xi = LM.GetL1() - _Alpha * (1 - gam) / _K;
         }
     }
+    public GEV(double K, double Alpha, double Xi){
+        _K = K;
+        _Alpha = Alpha;
+        _Xi = Xi;
+    }
     @Override
     public double GetInvCDF(double probability) {
         if(_K != 0){

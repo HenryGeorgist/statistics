@@ -20,6 +20,11 @@ public class Logistic extends Distributions.ContinuousDistribution{
         _Xi = LM.GetL1() - _Alpha * ((1/_K)-(java.lang.Math.PI/java.lang.Math.sin(_K * java.lang.Math.PI)));
         SetPeriodOfRecord(LM.GetSampleSize());
     }
+    public Logistic(double K, double Alpha, double Xi){
+        _K = K;
+        _Alpha = Alpha;
+        _Xi = Xi;
+    }
     @Override
     public double GetInvCDF(double probability) {
         if(_K!=0){

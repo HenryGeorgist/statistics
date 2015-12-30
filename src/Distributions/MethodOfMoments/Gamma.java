@@ -19,6 +19,10 @@ public class Gamma extends Distributions.ContinuousDistribution{
         _Beta = 1 / (BPM.GetStDev() / BPM.GetMean());
         SetPeriodOfRecord(BPM.GetSampleSize());
     }
+    public Gamma(double Alpha, double Beta){
+        _Alpha = Alpha;
+        _Beta = Beta;
+    }
     @Override
     public double GetInvCDF(double probability) {
         double xn = _Alpha/_Beta;

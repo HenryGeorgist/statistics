@@ -14,11 +14,19 @@ import Distributions.ContinuousDistribution;
 public class LogNormal extends ContinuousDistribution{
     private double _Mean;
     private double _StDev;
-    private int _SampleSize;
     public LogNormal(double mean, double stdev, int samplesize){
         _Mean = mean;
         _StDev = stdev;
-        _SampleSize = samplesize;
+        SetPeriodOfRecord(samplesize);
+    }
+    public LogNormal(double[] data){
+        for(int i = 0 ; i< data.length;i++){
+            data[i] = Math.log10(data[i]);
+        }
+        MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(data);
+        _Mean = BPM.GetMean();
+        _StDev = BPM.GetStDev();
+        SetPeriodOfRecord(BPM.GetSampleSize());
     }
     @Override
     public double GetInvCDF(double probability) {
@@ -39,8 +47,8 @@ public class LogNormal extends ContinuousDistribution{
         double z = sn.GetInvCDF(alphaValue);
         double zSquared = java.lang.Math.pow(z, 2);
         double kSquared = java.lang.Math.pow(k, 2);
-        double Avalue = (1-(zSquared)/2/(_SampleSize-1));
-        double Bvalue = (kSquared) - ((zSquared)/_SampleSize);
+        double Avalue = (1-(zSquared)/2/(GetPeriodOfRecord()-1));
+        double Bvalue = (kSquared) - ((zSquared)/GetPeriodOfRecord());
         double RootValue = java.lang.Math.sqrt(kSquared-(Avalue*Bvalue));
         if(alphaValue>.5){
             return java.lang.Math.pow(10,_Mean + _StDev*(k + RootValue)/Avalue);

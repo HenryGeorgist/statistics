@@ -21,7 +21,7 @@ public abstract class ContinuousDistribution {
     public abstract double GetCDF(double value);
     public abstract double GetPDF(double value);
     public int GetPeriodOfRecord(){return _PeriodOfRecord;}
-    public void SetPeriodOfRecord(int POR){_PeriodOfRecord = POR;}
+    public final void SetPeriodOfRecord(int POR){_PeriodOfRecord = POR;}
     // <editor-fold defaultstate="collapsed" desc="Goodness of fit tests">
     public double Kolmogorov_SmirnovTest(){
         // need to create a good empirical distribution.

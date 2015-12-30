@@ -18,6 +18,10 @@ public class Gumbel extends Distributions.ContinuousDistribution{
         _Xi = LM.GetL1() - 0.57721566490153287 * _Alpha;
         SetPeriodOfRecord(LM.GetSampleSize());
     }
+    public Gumbel(double Alpha, double Xi){
+        _Alpha = Alpha;
+        _Xi = Xi;
+    }
     @Override
     public double GetInvCDF(double probability) {
         return _Xi - _Alpha * java.lang.Math.log(-java.lang.Math.log(probability));

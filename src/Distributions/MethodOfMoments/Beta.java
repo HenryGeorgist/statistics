@@ -23,9 +23,11 @@ public class Beta extends Distributions.ContinuousDistribution {
             //Beta Fitting Error: variance is greater than mean*(1-mean), this data is not factorable to a beta distribution
         }
     }
-//        Public Overrides Function GetCDF(value As Double) As Double
-//        Return 
-//    End Function
+    public Beta(double Alpha, double Beta){
+        _Alpha = Alpha;
+        _Beta = Beta;
+    }
+    @Override
     public double GetInvCDF(double probability) {
         //use bisection since the shape can be bimodal.
         double value = 0.5; //midpoint of the beta output range
@@ -51,7 +53,6 @@ public class Beta extends Distributions.ContinuousDistribution {
     @Override
     public double GetCDF(double value) {//not sure this is right, technically it is the regularized incomplete beta.
         return SpecialFunctions.SpecialFunctions.RegularizedIncompleteBetaFunction(_Alpha, _Beta, value);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override
     public double GetPDF(double value) {
