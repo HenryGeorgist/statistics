@@ -47,7 +47,7 @@ public class BasicProductMomentsHistogram extends BasicProductMoments{
             }
             _Bins = tmparray;
         }
-        int index = _Bins.length * (int)java.lang.Math.floor((observation-_ExpectedMin)/ (_ExpectedMax-_ExpectedMin));
+        int index = (int)java.lang.Math.floor(_Bins.length * (observation-_ExpectedMin)/ (_ExpectedMax-_ExpectedMin));
         _Bins[index]+=1;
     } 
 }

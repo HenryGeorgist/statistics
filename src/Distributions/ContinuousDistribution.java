@@ -33,7 +33,7 @@ public abstract class ContinuousDistribution {
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Reflection based utilities, GetParamNames, GetParamValues, Clone, equals, hash, ReadFromXML, WriteToXML">
-        public String[] GetParamNames(){
+    public String[] GetParamNames(){
         Field[] flds = this.getClass().getDeclaredFields();
         String[] ParamNames = new String[flds.length];
         for(int i = 0; i< flds.length;i++){

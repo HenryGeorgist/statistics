@@ -14,6 +14,37 @@ public class SpecialFunctions {
     private static final double MAXLOG =  7.09782712893383996732E2;
     private static final double MINLOG = -7.451332191019412076235E2;
     private static final double MAXGAM = 171.624376956302725;
+    public static double Covariance(double[] array1, double[] array2){
+        double tmp = 0;
+        if(array1.length != array2.length){
+            //not supported
+            tmp = Double.NaN;
+        }else{
+            MomentFunctions.BasicProductMoments BPM1 = new MomentFunctions.BasicProductMoments(array1);
+            MomentFunctions.BasicProductMoments BPM2 = new MomentFunctions.BasicProductMoments(array2);
+            int number = Math.min(array1.length, array2.length);
+            for(int i = 0; i< number; i++ ){
+                tmp += (array1[i]-BPM1.GetMean())*(array2[i]*BPM2.GetMean());
+            }
+        }
+        return tmp;
+    }
+    public static double Correlation(double[] array1, double[] array2){
+        double tmp = 0;
+        if(array1.length != array2.length){
+            //not supported
+            tmp = Double.NaN;
+        }else{
+            MomentFunctions.BasicProductMoments BPM1 = new MomentFunctions.BasicProductMoments(array1);
+            MomentFunctions.BasicProductMoments BPM2 = new MomentFunctions.BasicProductMoments(array2);
+            int number = Math.min(array1.length, array2.length);
+            for(int i = 0; i< number; i++ ){
+                tmp += (array1[i]-BPM1.GetMean())*(array2[i]*BPM2.GetMean());
+            }
+            return tmp/(BPM1.GetStDev()*BPM2.GetStDev());
+        }
+        return tmp;
+    }
     public static int Factorial(int N){//could be improved with unsigned integers or the gamma function
         if(N==1){return 1;}
         return Factorial(N-1);
