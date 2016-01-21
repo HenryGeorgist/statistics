@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public abstract class TabularFunction {
     public abstract ArrayList<Double> GetXValues();
-    public abstract ArrayList<Object> GetYValues();
+    //public abstract ArrayList<Object> GetYValues();
     public abstract FunctionTypeEnum FunctionType();
     public abstract ArrayList<TabularFunctionError> Validate();
     //WriteToXElement
