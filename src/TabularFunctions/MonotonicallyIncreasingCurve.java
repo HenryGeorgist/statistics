@@ -7,6 +7,7 @@ package TabularFunctions;
 
 import Distributions.ContinuousDistribution;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -30,7 +31,19 @@ public class MonotonicallyIncreasingCurve extends TabularFunction implements ISa
     @Override
     public double GetYFromX(double x) {
         //determine how to implement a binary search.
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int index = Collections.binarySearch(_X,x);
+        //if index is negative, it should be (-(index)-1);
+        if(index>0){
+            return _Y.get(index);
+        }else{
+            //interpolate. make sure the index is correctly determined.
+            index *=-1;
+            if(index>=_Y.size()){return _Y.get(_Y.size() -1);}
+            double delta = _X.get(index) - _X.get(index-1);
+            double distance = x-_X.get(index)/delta;
+            double ydelta = _Y.get(index)- _Y.get(index-1);
+            return _Y.get(index-1) + ydelta*distance;
+        }
     }
     @Override
     public ArrayList<TabularFunctionError> Validate() {
