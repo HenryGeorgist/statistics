@@ -12,6 +12,11 @@ package Distributions.LinearMoments;
 public class Gumbel extends Distributions.ContinuousDistribution{
     private double _Alpha;
     private double _Xi;
+    public Gumbel(){
+        //for reflection
+        _Alpha = 0;
+        _Xi = 0;
+    }
     public Gumbel(double[] data){
         MomentFunctions.LinearMoments LM = new MomentFunctions.LinearMoments(data);
         _Alpha = LM.GetL2() / java.lang.Math.log(2);

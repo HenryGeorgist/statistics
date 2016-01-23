@@ -20,6 +20,9 @@ public class GEV extends ContinuousDistribution{
         _Sigma = sigma;
         _Xi = xi;
     }
+    public GEV(double[] data){
+        //not implemented
+    }
     @Override
     public double GetInvCDF(double probability) {
         if(probability<=0){

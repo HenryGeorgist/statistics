@@ -12,6 +12,12 @@ public class LogPearsonIII extends Distributions.ContinuousDistribution{
     private double _Alpha;
     private double _Beta;
     private double _Xi;
+    public LogPearsonIII(){
+        //for reflection
+        _Alpha = 0;
+        _Beta = 0;
+        _Xi = 0;
+    }
     public LogPearsonIII(double[] data){
         MomentFunctions.LinearMoments LM = new MomentFunctions.LinearMoments(data);
         SetPeriodOfRecord(LM.GetSampleSize());

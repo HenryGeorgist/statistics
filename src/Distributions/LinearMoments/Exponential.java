@@ -12,6 +12,11 @@ package Distributions.LinearMoments;
 public class Exponential extends Distributions.ContinuousDistribution{
     private double _Alpha;
     private double _Xi;
+    public Exponential(){
+        //for reflection
+        _Alpha = 0;
+        _Xi = 0;
+    }
     public Exponential(double[] data){
         MomentFunctions.LinearMoments LM = new MomentFunctions.LinearMoments(data);
         _Alpha = 2 * LM.GetL2();

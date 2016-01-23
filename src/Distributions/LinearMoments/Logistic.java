@@ -13,6 +13,12 @@ public class Logistic extends Distributions.ContinuousDistribution{
     private double _K;
     private double _Alpha;
     private double _Xi;
+    public Logistic(){
+        //for reflection
+        _K = 0;
+        _Alpha = 0;
+        _Xi = 0;
+    }
     public Logistic(double[] data){
         MomentFunctions.LinearMoments LM = new MomentFunctions.LinearMoments(data);
         _K = -LM.GetT3();

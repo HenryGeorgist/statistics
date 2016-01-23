@@ -19,7 +19,7 @@ public class Triangular extends ContinuousDistribution{
     public double GetMax(){return _Max;}
     public double GetMostLikely(){return _MostLikely;}
     public Triangular(){
-        //_SampleSize = 0;
+        //_SampleSize = 0; for reflection
         _Min = 0;
         _Max = 0;
         _MostLikely = 0;

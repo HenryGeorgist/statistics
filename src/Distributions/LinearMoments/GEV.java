@@ -13,6 +13,12 @@ public class GEV extends Distributions.ContinuousDistribution{
     private double _K;
     private double _Alpha;
     private double _Xi;
+    public GEV(){
+        //for reflection
+        _K = 0;
+        _Alpha = 0;
+        _Xi = 0;
+    }
     public GEV(double[] data){
         MomentFunctions.LinearMoments LM = new MomentFunctions.LinearMoments(data);
         SetPeriodOfRecord(LM.GetSampleSize());

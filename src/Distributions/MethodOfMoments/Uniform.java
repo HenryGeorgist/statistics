@@ -17,6 +17,7 @@ public class Uniform extends ContinuousDistribution{
     public double GetMin(){return _Min;}
     public double GetMax(){return _Max;}
     public Uniform(){
+        //for reflection
         _Min = 0;
         _Max = 0;
     }
@@ -53,7 +54,7 @@ public class Uniform extends ContinuousDistribution{
         if(value < _Min){
             return 0;
         }else if(value <= _Max){
-            return 1/(_Min-_Max);
+            return 1/(_Max-_Min);
         }else{
             return 0;
         }

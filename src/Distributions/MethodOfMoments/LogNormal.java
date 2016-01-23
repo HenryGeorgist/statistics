@@ -14,6 +14,11 @@ import Distributions.ContinuousDistribution;
 public class LogNormal extends ContinuousDistribution{
     private double _Mean;
     private double _StDev;
+    public LogNormal(){
+        //for reflection
+        _Mean = 0;
+        _StDev = 1;
+    }
     public LogNormal(double mean, double stdev, int samplesize){
         _Mean = mean;
         _StDev = stdev;

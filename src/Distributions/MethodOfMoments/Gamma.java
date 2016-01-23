@@ -12,6 +12,11 @@ package Distributions.MethodOfMoments;
 public class Gamma extends Distributions.ContinuousDistribution{
     private double _Alpha;
     private double _Beta;
+    public Gamma(){
+        //for reflection
+        _Alpha = 0;
+        _Beta = 0;
+    }
     public Gamma(double[] data){
         //http://www.itl.nist.gov/div898/handbook/eda/section3/eda366b.htm
         MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(data);

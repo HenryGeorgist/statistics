@@ -15,6 +15,12 @@ public class LogPearsonIII extends ContinuousDistribution{
     private double _Mean;
     private double _StDev;
     private double _Skew;//cannot be zero
+    public LogPearsonIII(){
+        //for reflection
+        _Mean = 0;
+        _StDev = 1;
+        _Skew = 0;
+    }
     public LogPearsonIII(double mean, double stdev, double skew,int sampleSize){
         _Mean = mean;
         _StDev = stdev;

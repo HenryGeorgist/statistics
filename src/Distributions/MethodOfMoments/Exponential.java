@@ -13,6 +13,10 @@ import Distributions.ContinuousDistribution;
  */
 public class Exponential extends ContinuousDistribution{
     private double _Lambda;
+    public Exponential(){
+        //for reflection
+        _Lambda = 1;
+    }
     public Exponential(double lambda){
         _Lambda = lambda;
     }

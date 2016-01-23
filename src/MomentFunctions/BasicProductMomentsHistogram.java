@@ -41,6 +41,7 @@ public class BasicProductMomentsHistogram extends BasicProductMoments{
         }else if(observation>_ExpectedMax){
             double binwidth = (_ExpectedMax - _ExpectedMin)/_Bins.length;
             int overdist = (int)java.lang.Math.ceil((observation-_ExpectedMax)/binwidth);
+            _ExpectedMax = _ExpectedMax + overdist*binwidth;
             int[] tmparray = new int[_Bins.length + overdist-1];
             for(int i = 0; i<_Bins.length;i++){
                 tmparray[i] = _Bins[i];

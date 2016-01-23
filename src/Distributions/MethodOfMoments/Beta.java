@@ -12,6 +12,11 @@ package Distributions.MethodOfMoments;
 public class Beta extends Distributions.ContinuousDistribution {
     private double _Alpha;
     private double _Beta;
+    public Beta(){
+        //for relfection
+        _Alpha = 0;
+        _Beta = 0;
+    }
     public Beta(double[] data){
         MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(data);
         double x = BPM.GetMean();

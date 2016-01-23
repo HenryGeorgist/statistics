@@ -14,6 +14,10 @@ import Distributions.ContinuousDistribution;
 public class Rayleigh extends ContinuousDistribution{
     private double _Sigma;
     public double GetSigma(){return _Sigma;}
+    public Rayleigh(){
+        //for reflection
+        _Sigma = 1;
+    }
     public Rayleigh(double sigma){
         _Sigma = sigma;
     }
