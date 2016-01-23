@@ -45,32 +45,32 @@ Special functions is a static class that computes functions that are necessary f
 ##Example Code
 The following codeblock is an example of how to create a monte carlo with the standard normal distribution
 ```java
-    public class ExampleMonteCarlo {
-        public static void main(String args[]){
-            MonteCarlo();
-        }
-        public static void MonteCarlo(){
-            //this is a very trivial example of creating a monte carlo using a
-            //standard normal distribution
-            Distributions.MethodOfMoments.Normal SN = new Distributions.MethodOfMoments.Normal();
-            double[] output = new double[10000];
-            java.util.Random r = new java.util.Random();
-            int j = output.length;
-            for(int i = 0; i < output.length; j++){
-                output[j] =SN.GetInvCDF(r.nextDouble());
-            }
-            //output now contains 10000 random normally distributed values.
-            
-            //to evaluate the mean and standard deviation of the output
-            //you can use Basic Product Moment Stats
-            MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(output);
-            System.out.println("Mean: " + BPM.GetMean());
-            System.out.println("StDev:" + BPM.GetStDev());
-            System.out.println("Sample Size: " + BPM.GetSampleSize());
-            System.out.println("Minimum: " + BPM.GetMin());
-            System.out.println("Maximum: " + BPM.GetMax());   
-        }
+public class ExampleMonteCarlo {
+    public static void main(String args[]){
+        MonteCarlo();
     }
+    public static void MonteCarlo(){
+        //this is a very trivial example of creating a monte carlo using a
+        //standard normal distribution
+        Distributions.MethodOfMoments.Normal SN = new Distributions.MethodOfMoments.Normal();
+        double[] output = new double[10000];
+        java.util.Random r = new java.util.Random();
+        int j = output.length;
+        for(int i = 0; i < output.length; j++){
+            output[j] =SN.GetInvCDF(r.nextDouble());
+        }
+        //output now contains 10000 random normally distributed values.
+        
+        //to evaluate the mean and standard deviation of the output
+        //you can use Basic Product Moment Stats
+        MomentFunctions.BasicProductMoments BPM = new MomentFunctions.BasicProductMoments(output);
+        System.out.println("Mean: " + BPM.GetMean());
+        System.out.println("StDev:" + BPM.GetStDev());
+        System.out.println("Sample Size: " + BPM.GetSampleSize());
+        System.out.println("Minimum: " + BPM.GetMin());
+        System.out.println("Maximum: " + BPM.GetMax());   
+    }
+}
 ```
 Exchanging: 
 ```java
@@ -87,8 +87,8 @@ As you can see in the previous example, we used the normal distribution from the
 
 To fit a distribution to data use the constructor that accepts an argument of double[].
 ```java
-    double[] data = {1.0,3.2,4.9,7.4,2.4,2.2};
-    Distributions.MethodOfMoments.Normal Norm = new Distributions.MethodOfMoments.Normal(data);
+double[] data = {1.0,3.2,4.9,7.4,2.4,2.2};
+Distributions.MethodOfMoments.Normal Norm = new Distributions.MethodOfMoments.Normal(data);
 ```
 This example will calculate the mean and standard of deviation for the resulting normal distribution Norm, based on the input data, and the output of the monte carlo will be based on that computed mean and standard of deviation.
 
