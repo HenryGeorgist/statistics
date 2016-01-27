@@ -7,7 +7,7 @@ package Distributions.LinearMoments;
 
 /**
  *
- * @author Q0HECWPL
+ * @author Will_and_Sara
  */
 public class Pareto extends Distributions.ContinuousDistribution{
     private double _K;

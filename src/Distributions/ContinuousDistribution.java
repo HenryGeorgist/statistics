@@ -17,8 +17,23 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public abstract class ContinuousDistribution {
     private int _PeriodOfRecord = 0;
+    /**
+     *This function produces a value for a given probability, this value will represent the Non-Exceedance value for that probability.
+     * @param probability a number between 0 and 1.
+     * @return a value distributed by the distribution defined in the concrete implementation of this abstract class.
+     */
     public abstract double GetInvCDF(double probability);
+    /**
+     *This function is the Cumulative Distribution Function. It returns a Non Exceedance probability for any value.  It will be implemented by all concrete implementations of this abstract class.
+     * @param value the value that a probability will be produced for.
+     * @return a probability that this value will be exceeded by any other value from the sample set.
+     */
     public abstract double GetCDF(double value);
+    /**
+     *This is the Probability Density Function. It describes the likelihood any given value will occur within a dataset.
+     * @param value the value that a likelihood will be returned for.
+     * @return the likelihood (defined by the concrete distribution) the specified value will occur in any given sample dataset (assuming the value is from the underlying distribution).
+     */
     public abstract double GetPDF(double value);
     public int GetPeriodOfRecord(){return _PeriodOfRecord;}
     public final void SetPeriodOfRecord(int POR){_PeriodOfRecord = POR;}
@@ -33,6 +48,11 @@ public abstract class ContinuousDistribution {
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Reflection based utilities, GetParamNames, GetParamValues, Clone, equals, hash, ReadFromXML, WriteToXML">
+
+    /**
+     *This function will return string representations of the parameter names for each distribution.
+     * @return a String array of all of the declared fields composing the concrete implementation of this ContinuousDistribution
+     */
     public String[] GetParamNames(){
         Field[] flds = this.getClass().getDeclaredFields();
         String[] ParamNames = new String[flds.length];
@@ -41,6 +61,10 @@ public abstract class ContinuousDistribution {
         }
         return ParamNames;
     }
+    /**
+     *This function determines the current values for each parameter in this concrete implementation of the ContinuousDistribution
+     * @return an array of object for each parameter in this class.
+     */
     public Object[] GetParamValues(){
         Field[] flds = this.getClass().getDeclaredFields();
         Object[] ParamVals = new Object[flds.length];
@@ -60,6 +84,11 @@ public abstract class ContinuousDistribution {
         }
         return ParamVals;
     }
+
+    /**
+     *Creates a clone of the current ContinuousDistribution.
+     * @return A ContinuousDistribution of the same type as the one this function is called on.
+     */
     public ContinuousDistribution Clone(){
         //create a new continuousdistribution and populate it from this using reflection.
         ContinuousDistribution Dist = null;

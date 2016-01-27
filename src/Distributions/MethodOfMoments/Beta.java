@@ -7,7 +7,7 @@ package Distributions.MethodOfMoments;
 
 /**
  *
- * @author Q0HECWPL
+ * @author Will_and_Sara
  */
 public class Beta extends Distributions.ContinuousDistribution {
     private double _Alpha;

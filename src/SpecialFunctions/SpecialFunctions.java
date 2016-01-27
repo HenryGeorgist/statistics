@@ -7,7 +7,7 @@ package SpecialFunctions;
 
 /**
  *
- * @author Q0HECWPL
+ * @author Will_and_Sara
  */
 public class SpecialFunctions {
     private static final double MACHEP =  1.11022302462515654042E-16;

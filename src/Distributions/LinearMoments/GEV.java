@@ -7,7 +7,7 @@ package Distributions.LinearMoments;
 
 /**
  *
- * @author Q0HECWPL and Micheal Wright
+ * @author Will_and_Sara and Micheal Wright
  */
 public class GEV extends Distributions.ContinuousDistribution{
     private double _K;

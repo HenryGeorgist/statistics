@@ -9,7 +9,7 @@ import Distributions.ContinuousDistribution;
 
 /**
  *
- * @author Q0HECWPL
+ * @author Will_and_Sara
  */
 public class LogNormal extends ContinuousDistribution{
     private double _Mean;

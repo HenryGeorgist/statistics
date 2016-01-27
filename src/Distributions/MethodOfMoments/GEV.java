@@ -9,7 +9,7 @@ import Distributions.ContinuousDistribution;
 
 /**
  *
- * @author Q0HECWPL
+ * @author Will_and_Sara
  */
 public class GEV extends ContinuousDistribution{
     private double _Mu;//https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution
