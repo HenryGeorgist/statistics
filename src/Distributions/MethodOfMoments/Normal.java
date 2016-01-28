@@ -68,7 +68,7 @@ public class Normal extends ContinuousDistribution {
     }
     @Override
     public double GetCDF(double value) {
-        //decide which method i want to use.  errfunction, the method i came up with in vb, or 
+        //decide which method i want to use.  errfunction, the method i came up with in vb, or something else.
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override

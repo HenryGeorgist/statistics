@@ -24,6 +24,10 @@ public class LogNormal extends ContinuousDistribution{
         _StDev = stdev;
         SetPeriodOfRecord(samplesize);
     }
+    /**
+     *This takes an input array of sample data, calculates the log base 10 of the data, then calculates the mean and standard deviation of the log data.
+     * @param data the sampled data (in linear space)
+     */
     public LogNormal(double[] data){
         for(int i = 0 ; i< data.length;i++){
             data[i] = Math.log10(data[i]);
@@ -40,11 +44,13 @@ public class LogNormal extends ContinuousDistribution{
     }
     @Override
     public double GetCDF(double value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Distributions.MethodOfMoments.Normal n = new Distributions.MethodOfMoments.Normal(_Mean,_StDev);
+        return n.GetCDF(java.lang.Math.log10(value));
     }
     @Override
     public double GetPDF(double value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Distributions.MethodOfMoments.Normal n = new Distributions.MethodOfMoments.Normal(_Mean,_StDev);
+        return n.GetPDF(java.lang.Math.log10(value));
     }
     public double Bullentin17BConfidenceLimit(double probability, double alphaValue){
         Normal sn = new Normal(0,1);

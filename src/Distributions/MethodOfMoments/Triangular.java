@@ -30,6 +30,35 @@ public class Triangular extends ContinuousDistribution{
         _Max = max;
         _MostLikely = mostlikely;
     }
+    public Triangular(double[] data){
+        MomentFunctions.ProductMoments PM = new MomentFunctions.ProductMoments(data);
+        //Simple Method:
+//        _Min = PM.GetMin();
+//        _Max = PM.GetMax();
+//        _MostLikely = PM.GetMean();
+        
+        //Alternate Method from Ben Chaon
+        double sqrt2 = java.lang.Math.sqrt(2);
+        double sqrt3 = java.lang.Math.sqrt(3);
+        double a3 = PM.GetSkew();
+        double b3;
+        double angle;
+        double aa;
+        double bb;
+        if(8-a3*a3<0){
+            a3 = java.lang.Math.sin(a3)*2*sqrt2;
+            b3 = 0;
+        }else{
+            b3 = java.lang.Math.sqrt(8-a3*a3);
+        }
+        angle = java.lang.Math.atan2(b3, a3);
+        aa = java.lang.Math.cos(angle/3.0);
+        bb = java.lang.Math.sin(angle/3.0);
+        _Min = (PM.GetMean()+sqrt2*PM.GetStDev()*(aa-sqrt3*bb));
+        _MostLikely = (PM.GetMean()-2*sqrt2*PM.GetStDev()*aa);
+        _Max = (PM.GetMean()+sqrt2*PM.GetStDev()*(aa+sqrt3*bb));
+        SetPeriodOfRecord(PM.GetSampleSize());
+    }
     @Override
     public double GetInvCDF(double probability) {
         double a = _MostLikely - _Min;
@@ -46,10 +75,16 @@ public class Triangular extends ContinuousDistribution{
     }
     @Override
     public double GetCDF(double value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(value<_Min){return 0;}
+        if(value<_MostLikely){return (java.lang.Math.pow((value-_Min),2)/(_Max-_Min)*(_MostLikely-_Min));}
+        if(value<=_Max){return 1-(java.lang.Math.pow((_Max-value),2)/(_Max-_Min)*(_Max-_MostLikely));}
+        return 1;
     }
     @Override
     public double GetPDF(double value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(value<_Min){return 0;}
+        if(value<_MostLikely){return (2*(value-_Min)/(_Max-_Min)*(_MostLikely-_Min));}
+        if(value<=_Max){return (2*(_Max-value)/(_Max-_Min)*(_Max-_MostLikely));}
+        return 0;
     }
 }
