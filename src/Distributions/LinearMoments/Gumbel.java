@@ -5,6 +5,9 @@
  */
 package Distributions.LinearMoments;
 
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
+
 /**
  *
  * @author Will_and_Sara
@@ -38,5 +41,10 @@ public class Gumbel extends Distributions.ContinuousDistribution{
     @Override
     public double GetPDF(double value) {
         return (1/_Alpha) * java.lang.Math.exp(-(value - _Xi) / _Alpha) * java.lang.Math.exp(-java.lang.Math.exp(-(value - _Xi) / _Alpha));
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

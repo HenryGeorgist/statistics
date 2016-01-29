@@ -6,6 +6,8 @@
 package Distributions.MethodOfMoments;
 
 import Distributions.ContinuousDistribution;
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
 
 /**
  *
@@ -40,6 +42,11 @@ public class Exponential extends ContinuousDistribution{
         }else{
             return _Lambda * java.lang.Math.exp(-_Lambda*value);
         }
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

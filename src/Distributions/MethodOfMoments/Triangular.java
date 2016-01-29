@@ -6,6 +6,8 @@
 package Distributions.MethodOfMoments;
 
 import Distributions.ContinuousDistribution;
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
 
 /**
  *
@@ -86,5 +88,14 @@ public class Triangular extends ContinuousDistribution{
         if(value<_MostLikely){return (2*(value-_Min)/(_Max-_Min)*(_MostLikely-_Min));}
         if(value<=_Max){return (2*(_Max-value)/(_Max-_Min)*(_Max-_MostLikely));}
         return 0;
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_Min>_Max){errors.add(new ContinuousDistributionError("Min cannot be greater than Max"));}
+        if(_Min>_MostLikely){errors.add(new ContinuousDistributionError("Min cannot be greater than MostLikely"));}
+        if(_MostLikely>_Max){errors.add(new ContinuousDistributionError("MostLikely cannot be greater than Max"));}
+        return errors;
     }
 }

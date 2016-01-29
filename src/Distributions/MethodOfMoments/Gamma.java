@@ -5,6 +5,9 @@
  */
 package Distributions.MethodOfMoments;
 
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
+
 /**
  *
  * @author Will_and_Sara
@@ -47,5 +50,10 @@ public class Gamma extends Distributions.ContinuousDistribution{
     @Override
     public double GetPDF(double value) {
         return (((Math.pow(_Beta, _Alpha))*((Math.pow(value,_Alpha-1))*Math.exp(-_Beta*value))/Math.exp(SpecialFunctions.SpecialFunctions.gammaln(_Alpha))));
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

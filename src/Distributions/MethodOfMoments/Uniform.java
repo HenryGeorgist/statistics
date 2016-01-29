@@ -6,6 +6,8 @@
 package Distributions.MethodOfMoments;
 
 import Distributions.ContinuousDistribution;
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,5 +60,10 @@ public class Uniform extends ContinuousDistribution{
         }else{
             return 0;
         }
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package Distributions.LinearMoments;
+
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
+
 /**
  *
  * @author Will_and_Sara
@@ -63,6 +67,11 @@ public class LogPearsonIII extends Distributions.ContinuousDistribution{
     }
     @Override
     public double GetPDF(double value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

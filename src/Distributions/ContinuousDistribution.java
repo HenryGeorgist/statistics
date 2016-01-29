@@ -6,6 +6,7 @@
 package Distributions;
 import org.w3c.dom.*;
 import java.lang.reflect.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -36,6 +37,7 @@ public abstract class ContinuousDistribution {
      */
     public abstract double GetPDF(double value);
     public int GetPeriodOfRecord(){return _PeriodOfRecord;}
+    public abstract ArrayList<ContinuousDistributionError> Validate();
     public final void SetPeriodOfRecord(int POR){_PeriodOfRecord = POR;}
     // <editor-fold defaultstate="collapsed" desc="Goodness of fit tests">
     public double Kolmogorov_SmirnovTest(){

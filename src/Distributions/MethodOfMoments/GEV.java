@@ -6,6 +6,8 @@
 package Distributions.MethodOfMoments;
 
 import Distributions.ContinuousDistribution;
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
 
 /**
  *
@@ -67,5 +69,10 @@ public class GEV extends ContinuousDistribution{
         }else{
             return _Mu-_Sigma*java.lang.Math.log(java.lang.Math.log(1/probability));
         }
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

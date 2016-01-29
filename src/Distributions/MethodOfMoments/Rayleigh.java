@@ -6,6 +6,8 @@
 package Distributions.MethodOfMoments;
 
 import Distributions.ContinuousDistribution;
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,5 +39,10 @@ public class Rayleigh extends ContinuousDistribution{
     @Override
     public double GetPDF(double value) {
         return (value/(java.lang.Math.pow(_Sigma, 2)))* java.lang.Math.exp(-(java.lang.Math.pow(value, 2))/(2*(java.lang.Math.pow(_Sigma,2))));
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -6,6 +6,8 @@
 package Distributions.MethodOfMoments;
 
 import Distributions.ContinuousDistribution;
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
 
 /**
  *
@@ -74,5 +76,12 @@ public class Normal extends ContinuousDistribution {
     @Override
     public double GetPDF(double value) {
         return (1/Math.sqrt(2*Math.PI)*Math.pow(_StDev,2.0))*Math.exp((-(Math.pow(value-_Mean, 2)/(2*Math.pow(_StDev, 2)))));
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_StDev<=0){errors.add(new ContinuousDistributionError("Standard of Deviation must be greater than 0"));}
+        return errors;
     }
 }

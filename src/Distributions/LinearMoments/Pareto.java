@@ -5,6 +5,9 @@
  */
 package Distributions.LinearMoments;
 
+import Distributions.ContinuousDistributionError;
+import java.util.ArrayList;
+
 /**
  *
  * @author Will_and_Sara
@@ -57,5 +60,10 @@ public class Pareto extends Distributions.ContinuousDistribution{
         }else{
             return (value - _Xi) / _Alpha;
         }       
+    }
+
+    @Override
+    public ArrayList<ContinuousDistributionError> Validate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
