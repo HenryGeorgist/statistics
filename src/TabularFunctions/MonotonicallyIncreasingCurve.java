@@ -24,6 +24,10 @@ public class MonotonicallyIncreasingCurve extends TabularFunction implements ISa
     public ArrayList<Double> GetYValues() {
         return _Y;
     }
+    public MonotonicallyIncreasingCurve(ArrayList<Double> Xvalues, ArrayList<Double> Yvalues){
+        _X = Xvalues;
+        _Y = Yvalues;
+    }
     @Override
     public FunctionTypeEnum FunctionType() {
         return FunctionTypeEnum.MonotonicallyIncreasing;
@@ -78,5 +82,9 @@ public class MonotonicallyIncreasingCurve extends TabularFunction implements ISa
             output.add(new Distributions.MethodOfMoments.Uniform(_Y.get(i),_Y.get(i)));
         }
         return output;
+    }
+    @Override
+    public ISampleDeterministically CurveSample(double probability) {
+        return this;//should implement a clone function
     }
 }

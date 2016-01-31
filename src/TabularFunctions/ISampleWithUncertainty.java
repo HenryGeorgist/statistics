@@ -14,4 +14,5 @@ public interface ISampleWithUncertainty {
     public double GetYFromX(double x, double probability);
     public ArrayList<Double> GetYValues(double probability);
     public ArrayList<Distributions.ContinuousDistribution> GetYDistributions();
+    public ISampleDeterministically CurveSample(double probability);
 }

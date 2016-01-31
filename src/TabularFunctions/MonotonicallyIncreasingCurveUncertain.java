@@ -24,6 +24,10 @@ public class MonotonicallyIncreasingCurveUncertain extends TabularFunction imple
     public ArrayList<ContinuousDistribution> GetYDistributions() {
         return _Y;
     }
+    public MonotonicallyIncreasingCurveUncertain(ArrayList<Double> Xvalues, ArrayList<ContinuousDistribution> Yvalues){
+        _X = Xvalues;
+        _Y = Yvalues;
+    }
     @Override
     public double GetYFromX(double x, double probability) {
                 //determine how to implement a binary search.
@@ -89,5 +93,14 @@ public class MonotonicallyIncreasingCurveUncertain extends TabularFunction imple
             } 
         }
         return output;
+    }
+
+    @Override
+    public ISampleDeterministically CurveSample(double probability) {
+        ArrayList<Double> samples = new ArrayList<>();
+        for(int i = 0; i<_Y.size();i++){
+            samples.add(_Y.get(i).GetInvCDF(probability));
+        }
+        return new MonotonicallyIncreasingCurve(_X,samples);
     }
 }
