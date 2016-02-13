@@ -5,13 +5,13 @@
  */
 package TabularFunctions;
 
-import java.util.ArrayList;
+import org.w3c.dom.Element;
 
 /**
  *
  * @author Will_and_Sara
  */
-public interface ISampleDeterministically extends IWriteToXML{
-    public double GetYFromX(double x);
-    public ArrayList<Double> GetYValues();
+public interface IWriteToXML {
+    abstract public void ReadFromXMLElement(Element ele);
+    abstract public Element WriteToXMLElement();
 }

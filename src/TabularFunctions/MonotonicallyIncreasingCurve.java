@@ -6,8 +6,20 @@
 package TabularFunctions;
 
 import Distributions.ContinuousDistribution;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 
 /**
  *
@@ -86,5 +98,38 @@ public class MonotonicallyIncreasingCurve extends TabularFunction implements ISa
     @Override
     public ISampleDeterministically CurveSample(double probability) {
         return this;//should implement a clone function
+    }
+
+    @Override
+    public void ReadFromXMLElement(Element ele) {
+        _X = new ArrayList<>();
+        _Y = new ArrayList<>();
+        for(int i = 0; i < ele.getChildNodes().getLength();i++){
+            NamedNodeMap M = ele.getChildNodes().item(i).getAttributes();
+            _X.add(Double.parseDouble(M.getNamedItem("X").getNodeValue()));
+            _Y.add(Double.parseDouble(M.getNamedItem("Y").getNodeValue()));
+        }
+    }
+
+    @Override
+    public Element WriteToXMLElement() {
+        try {
+            DocumentBuilderFactory d = DocumentBuilderFactory.newInstance();
+            DocumentBuilder Db;
+            Db = d.newDocumentBuilder();
+            Document doc = Db.newDocument();
+            Element ele = doc.createElement(this.getClass().getName());
+            Element ord;
+            for(int i = 0; i<_Y.size();i++){
+                ord = doc.createElement("Ordinate");
+                ord.setAttribute("X", String.format("%.5f",_X.get(i)));
+                ord.setAttribute("Y", String.format("%.5f",_Y.get(i)));
+                
+            }
+            return ele;
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(MonotonicallyIncreasingCurveUncertain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

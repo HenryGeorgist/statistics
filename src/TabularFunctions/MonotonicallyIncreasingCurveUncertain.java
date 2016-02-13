@@ -6,8 +6,21 @@
 package TabularFunctions;
 
 import Distributions.ContinuousDistribution;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -102,5 +115,73 @@ public class MonotonicallyIncreasingCurveUncertain extends TabularFunction imple
             samples.add(_Y.get(i).GetInvCDF(probability));
         }
         return new MonotonicallyIncreasingCurve(_X,samples);
+    }
+    @Override
+    public void ReadFromXMLElement(Element ele) {
+        _X = new ArrayList<>();
+        _Y = new ArrayList<>();
+        ContinuousDistribution Dist;
+        Class<?> c;
+        try {
+            c = Class.forName(ele.getAttribute("UncertaintyType"));
+            Dist=(ContinuousDistribution) c.getConstructor().newInstance();
+            Field[] flds = Dist.getClass().getDeclaredFields();
+            for(int i = 0; i < ele.getChildNodes().getLength();i++){
+                Dist=(ContinuousDistribution) c.getConstructor().newInstance();
+                NamedNodeMap M = ele.getChildNodes().item(i).getAttributes();
+                _X.add(Double.parseDouble(M.getNamedItem("X").getNodeValue()));
+                for(Field f : flds){
+                    switch(f.getType().getName()){
+                        case "double":
+                            f.set(Dist,Double.parseDouble(M.getNamedItem(f.getName()).getNodeValue()));
+                            break;
+//                        case "int":
+//                            f.set(Dist,Integer.parseInt(ele.getAttribute(f.getName())));
+//                            break;
+                        default:
+                            //throw error?
+                            break;
+                    }
+                }
+                _Y.add(Dist);
+            }
+        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(MonotonicallyIncreasingCurveUncertain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Override
+    public Element WriteToXMLElement() {
+        try {
+            DocumentBuilderFactory d = DocumentBuilderFactory.newInstance();
+            DocumentBuilder Db;
+            Db = d.newDocumentBuilder();
+            Document doc = Db.newDocument();
+            Element ele = doc.createElement(this.getClass().getName());
+            ele.setAttribute("UncertaintyType", _Y.get(0).getClass().getName());
+            Field[] flds = _Y.get(0).getClass().getDeclaredFields();
+            Element ord;
+            for(int i = 0; i<_Y.size();i++){
+                ord = doc.createElement("Ordinate");
+                ord.setAttribute("X", String.format("%.5f",_X.get(i)));
+                for(Field f : flds){
+                    try {
+                        switch(f.getType().getName()){
+                            case "double":
+                                ord.setAttribute(f.getName(), Double.toString(f.getDouble(_Y.get(i))));
+                                break;
+                            default:
+                                break; 
+                        }
+                    } catch (IllegalArgumentException | IllegalAccessException ex) {
+                        Logger.getLogger(MonotonicallyIncreasingCurveUncertain.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+            }
+            return ele;
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(MonotonicallyIncreasingCurveUncertain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

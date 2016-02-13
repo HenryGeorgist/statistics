@@ -140,8 +140,8 @@ public abstract class ContinuousDistribution {
     public int hashCode() {
         int hash = this.getClass().getName().hashCode();
         Object[] vals = this.GetParamValues();
-        for(int i = 0;i<vals.length; i++){
-            hash += vals[i].hashCode();
+        for (Object val : vals) {
+            hash += val.hashCode();
         }
         return hash;
     }

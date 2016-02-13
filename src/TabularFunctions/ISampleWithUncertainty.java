@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Will_and_Sara
  */
-public interface ISampleWithUncertainty {
+public interface ISampleWithUncertainty extends IWriteToXML {
     public double GetYFromX(double x, double probability);
     public ArrayList<Double> GetYValues(double probability);
     public ArrayList<Distributions.ContinuousDistribution> GetYDistributions();
