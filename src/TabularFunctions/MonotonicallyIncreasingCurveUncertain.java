@@ -41,6 +41,9 @@ public class MonotonicallyIncreasingCurveUncertain extends TabularFunction imple
         _X = Xvalues;
         _Y = Yvalues;
     }
+    public MonotonicallyIncreasingCurveUncertain(Element ele){
+        ReadFromXMLElement(ele);
+    }
     @Override
     public double GetYFromX(double x, double probability) {
                 //determine how to implement a binary search.

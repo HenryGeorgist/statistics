@@ -145,7 +145,7 @@ public abstract class ContinuousDistribution {
         }
         return hash;
     }
-    public ContinuousDistribution ReadFromXML(Element ele) {
+    public static ContinuousDistribution ReadFromXML(Element ele) {
             ContinuousDistribution Dist = null;
             Class<?> c;
         try {

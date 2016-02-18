@@ -40,6 +40,9 @@ public class MonotonicallyIncreasingCurve extends TabularFunction implements ISa
         _X = Xvalues;
         _Y = Yvalues;
     }
+    public MonotonicallyIncreasingCurve(Element ele){
+        ReadFromXMLElement(ele);
+    }
     @Override
     public FunctionTypeEnum FunctionType() {
         return FunctionTypeEnum.MonotonicallyIncreasing;
