@@ -68,16 +68,108 @@ public class Normal extends ContinuousDistribution {
         x = i*x;
         return (x*_StDev)+_Mean;
     }
+    private double TrapazoidalIntegration(double y1, double y2, double deltax){
+        double deltay = 0;
+        double rect = 0;
+        if(y1>y2){
+            deltay = y1-y2;
+            rect = java.lang.Math.abs(y2*deltax);
+        }else{
+            deltay = y2-y1;
+            rect = java.lang.Math.abs(y1*deltax);
+        }
+        double tri = (1/2)*(deltax*deltay);
+        return rect + java.lang.Math.abs(tri);
+    }
+    private double FindArea(double a, double inc, double x){
+        double x1 = GetInvCDF(a);
+        double x2 = GetInvCDF(a+inc);
+        while(x2>=x){
+           x1 = x2;
+           a += inc;
+           x2 = GetInvCDF(a+inc);
+        }
+        double y1 = GetPDF(x1);
+        double y2 = GetPDF(x2);
+        double deltax = java.lang.Math.abs(x1-x2);
+        double area = TrapazoidalIntegration(y1,y2,deltax);
+        double interpvalue = (x-x1)/(x2-x1);
+        a+=area*interpvalue;
+        return a;
+    }
     @Override
     public double GetCDF(double value) {
         //decide which method i want to use.  errfunction, the method i came up with in vb, or something else.
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(value == _Mean){return .5;}
+        double dist = value - _Mean;
+        int stdevs = (int)java.lang.Math.floor(java.lang.Math.abs(dist/_StDev));
+        double inc = 1/250;
+        double a = 0.5;
+        double a1 = 0.682689492137/2;
+        double a2 = 0.954499736104/2;
+        double a3 = 0.997300203937/2;
+        double a4 = 0.999936657516/2;
+        double a5 = 0.999999426687/2;
+        double a6 = 0.999999998027/2;
+        double a7 = (a-a6)/2;
+        switch(stdevs){
+            case 0:
+                if(dist<0){a+=-a1;}
+                return FindArea(a,inc,value);
+            case 1:
+                if(dist<0){
+                    a-=a2;
+                }else{
+                    a+=a1;
+                }
+                return FindArea(a,inc,value);
+            case 2:
+                if(dist<0){
+                    a-=a3;
+                }else{
+                    a+=a2;
+                }
+                return FindArea(a,inc,value);
+            case 3:
+                if(dist<0){
+                    a-=a4;
+                }else{
+                    a+=a3;
+                }
+                return FindArea(a,inc,value);
+            case 4:
+                if(dist<0){
+                    a-=a5;
+                }else{
+                    a+=a4;
+                }
+                return FindArea(a,inc,value);
+            case 5:
+                if(dist<0){
+                    a-=a6;
+                }else{
+                    a+=a5;
+                }
+                return FindArea(a,inc,value);
+            case 6:
+                if(dist<0){
+                    a-=a7;
+                }else{
+                    a+=a6;
+                }
+                return FindArea(a,inc,value);
+            default:
+                if(dist<0){
+                    return 0;
+                }else{
+                    return 1;
+                }
+        }
     }
     @Override
     public double GetPDF(double value) {
         return (1/Math.sqrt(2*Math.PI)*Math.pow(_StDev,2.0))*Math.exp((-(Math.pow(value-_Mean, 2)/(2*Math.pow(_StDev, 2)))));
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
         ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
