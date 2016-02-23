@@ -69,6 +69,10 @@ public class Beta extends Distributions.ContinuousDistribution {
 
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_Alpha<=0){errors.add(new ContinuousDistributionError("Alpha must be greater than 0"));}
+        if(_Beta<=0){errors.add(new ContinuousDistributionError("Beta must be greater than 0"));}
+        if(_Alpha<=_Beta){errors.add(new ContinuousDistributionError("Alpha must be greater than Beta"));}
+        return errors;
     }
 }

@@ -69,9 +69,10 @@ public class LogNormal extends ContinuousDistribution{
             return java.lang.Math.pow(10,_Mean + _StDev*(k - RootValue)/Avalue);
         }
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_StDev<=0){errors.add(new ContinuousDistributionError("Standard of Deviation must be greater than 0"));}
+        return errors;
     }
 }

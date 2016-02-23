@@ -61,9 +61,10 @@ public class Uniform extends ContinuousDistribution{
             return 0;
         }
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errs = new ArrayList<>();
+        if(_Min>_Max){errs.add(new ContinuousDistributionError("The min cannot be greater than the max in the uniform distribuiton."));}
+        return errs;
     }
 }

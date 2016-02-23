@@ -43,6 +43,8 @@ public class Rayleigh extends ContinuousDistribution{
 
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errs = new ArrayList<>();
+        if(_Sigma<=0){errs.add(new ContinuousDistributionError("Sigma cannot be less than or equal to zero in the Rayleigh distribuiton."));}
+        return errs;
     }
 }

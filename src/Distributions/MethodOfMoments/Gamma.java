@@ -51,9 +51,10 @@ public class Gamma extends Distributions.ContinuousDistribution{
     public double GetPDF(double value) {
         return (((Math.pow(_Beta, _Alpha))*((Math.pow(value,_Alpha-1))*Math.exp(-_Beta*value))/Math.exp(SpecialFunctions.SpecialFunctions.gammaln(_Alpha))));
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_Beta<=0){errors.add(new ContinuousDistributionError("Beta must be greater than 0"));}
+        return errors;
     }
 }

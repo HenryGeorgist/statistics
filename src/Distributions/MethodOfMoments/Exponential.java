@@ -46,7 +46,9 @@ public class Exponential extends ContinuousDistribution{
 
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_Lambda<=0){errors.add(new ContinuousDistributionError("Lambda must be greater than 0"));}
+        return errors;
     }
     
 }

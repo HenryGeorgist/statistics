@@ -70,9 +70,11 @@ public class GEV extends ContinuousDistribution{
             return _Mu-_Sigma*java.lang.Math.log(java.lang.Math.log(1/probability));
         }
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_Xi<=0){errors.add(new ContinuousDistributionError("Xi must be greater than 0"));}
+        if(_Sigma<=0){errors.add(new ContinuousDistributionError("Sigma must be greater than 0"));}
+        return errors;
     }
 }
