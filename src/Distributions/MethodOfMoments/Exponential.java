@@ -43,7 +43,6 @@ public class Exponential extends ContinuousDistribution{
             return _Lambda * java.lang.Math.exp(-_Lambda*value);
         }
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
         ArrayList<ContinuousDistributionError> errors = new ArrayList<>();

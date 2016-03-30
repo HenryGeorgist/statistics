@@ -89,7 +89,6 @@ public class Triangular extends ContinuousDistribution{
         if(value<=_Max){return (2*(_Max-value)/(_Max-_Min)*(_Max-_MostLikely));}
         return 0;
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
         ArrayList<ContinuousDistributionError> errors = new ArrayList<>();

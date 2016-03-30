@@ -40,7 +40,6 @@ public class Rayleigh extends ContinuousDistribution{
     public double GetPDF(double value) {
         return (value/(java.lang.Math.pow(_Sigma, 2)))* java.lang.Math.exp(-(java.lang.Math.pow(value, 2))/(2*(java.lang.Math.pow(_Sigma,2))));
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
         ArrayList<ContinuousDistributionError> errs = new ArrayList<>();

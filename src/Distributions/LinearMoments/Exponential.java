@@ -42,9 +42,10 @@ public class Exponential extends Distributions.ContinuousDistribution{
     public double GetPDF(double value) {
         return (1/_Alpha) * java.lang.Math.exp(-(value - _Xi) / _Alpha);
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_Alpha == 0){errors.add(new ContinuousDistributionError("Alpha cannot be zero"));}
+        return errors;
     }
 }

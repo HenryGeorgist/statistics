@@ -66,7 +66,6 @@ public class Beta extends Distributions.ContinuousDistribution {
     public double GetPDF(double value) {
         return (Math.pow(value ,(_Alpha - 1)) * (Math.pow((1 - value) , (_Beta - 1)))) / SpecialFunctions.SpecialFunctions.BetaFunction(_Alpha, _Beta);
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
         ArrayList<ContinuousDistributionError> errors = new ArrayList<>();

@@ -69,9 +69,10 @@ public class LogPearsonIII extends Distributions.ContinuousDistribution{
     public double GetPDF(double value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
+        if(_Beta == 0){errors.add(new ContinuousDistributionError("Beta cannot be zero"));}
+        return errors;
     }
 }

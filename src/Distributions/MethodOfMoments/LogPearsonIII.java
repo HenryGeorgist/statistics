@@ -82,7 +82,6 @@ public class LogPearsonIII extends ContinuousDistribution{
             return java.lang.Math.pow(10,_Mean + _StDev*(k - RootValue)/Avalue);
         }
     }
-
     @Override
     public ArrayList<ContinuousDistributionError> Validate() {
         ArrayList<ContinuousDistributionError> errors = new ArrayList<>();
