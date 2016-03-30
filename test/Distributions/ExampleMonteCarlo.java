@@ -19,9 +19,8 @@ public class ExampleMonteCarlo {
         Distributions.MethodOfMoments.Normal SN = new Distributions.MethodOfMoments.Normal();
         double[] output = new double[1000];
         java.util.Random r = new java.util.Random();
-        int j = output.length;
-        for(int i = 0; i < output.length; j++){
-            output[j] =SN.GetInvCDF(r.nextDouble());
+        for(int i = 0; i < output.length; i++){
+            output[i] =SN.GetInvCDF(r.nextDouble());
         }
         //output now contains 1000 random normally distributed values.
         
