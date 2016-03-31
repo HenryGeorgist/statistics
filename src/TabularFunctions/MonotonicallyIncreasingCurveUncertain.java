@@ -129,24 +129,27 @@ public class MonotonicallyIncreasingCurveUncertain extends TabularFunction imple
             c = Class.forName(ele.getAttribute("UncertaintyType"));
             Dist=(ContinuousDistribution) c.getConstructor().newInstance();
             Field[] flds = Dist.getClass().getDeclaredFields();
-            for(int i = 0; i < ele.getChildNodes().getLength();i++){
+            for(int i = 1; i < ele.getChildNodes().getLength();i++){
                 Dist=(ContinuousDistribution) c.getConstructor().newInstance();
-                NamedNodeMap M = ele.getChildNodes().item(i).getAttributes();
-                _X.add(Double.parseDouble(M.getNamedItem("X").getNodeValue()));
-                for(Field f : flds){
-                    switch(f.getType().getName()){
-                        case "double":
-                            f.set(Dist,Double.parseDouble(M.getNamedItem(f.getName()).getNodeValue()));
-                            break;
-//                        case "int":
-//                            f.set(Dist,Integer.parseInt(ele.getAttribute(f.getName())));
-//                            break;
-                        default:
-                            //throw error?
-                            break;
+                Node N = ele.getChildNodes().item(i);
+                if(N.hasAttributes()){
+                    Element ord = (Element)N;
+                    _X.add(Double.parseDouble(ord.getAttribute("X")));
+                    for(Field f : flds){
+                        switch(f.getType().getName()){
+                            case "double":
+                                f.set(Dist,Double.parseDouble(ord.getAttribute(f.getName())));
+                                break;
+    //                        case "int":
+    //                            f.set(Dist,Integer.parseInt(ele.getAttribute(f.getName())));
+    //                            break;
+                            default:
+                                //throw error?
+                                break;
+                        }
                     }
+                    _Y.add(Dist); 
                 }
-                _Y.add(Dist);
             }
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(MonotonicallyIncreasingCurveUncertain.class.getName()).log(Level.SEVERE, null, ex);
