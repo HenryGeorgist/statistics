@@ -16,7 +16,11 @@ public class XMLReadableFactory {
         switch(ele.getTagName()){
             case "MonotonicallyIncreasingCurveUncertain":
                 return new MonotonicallyIncreasingCurveUncertain(ele);
+            case "MonotonicCurveUSingle"://Statistics.dll
+                return new MonotonicallyIncreasingCurveUncertain(ele);
             case "MonotonicallyIncreasingCurve":
+                return new MonotonicallyIncreasingCurve(ele);
+            case "MonotonicCurveSingle"://Statistics.dll
                 return new MonotonicallyIncreasingCurve(ele);
             default:
                 return null;

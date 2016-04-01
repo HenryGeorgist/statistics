@@ -86,7 +86,6 @@ public abstract class ContinuousDistribution {
         }
         return ParamVals;
     }
-
     /**
      *Creates a clone of the current ContinuousDistribution.
      * @return A ContinuousDistribution of the same type as the one this function is called on.
@@ -149,7 +148,20 @@ public abstract class ContinuousDistribution {
             ContinuousDistribution Dist = null;
             Class<?> c;
         try {
-            c = Class.forName(ele.getTagName());
+            String DistName = ele.getTagName();
+            if(DistName.equals("None")){
+                // none is not supported.
+                throw new IllegalArgumentException();
+            }else if(DistName.contains(".")){
+                //do nothing, this is probably from Statistics.jar.
+            }else{
+                if(DistName.charAt(0)== "L".toCharArray()[0] && DistName.charAt(1) != "o".toCharArray()[0]){//is l but isnt lo, so LNormal (which is how Statistics differntiates Linear moments.
+                    DistName = "Distributions.LinearMoments." + DistName.substring(1,DistName.length()-1);//remove the L.
+                }else{
+                    DistName = "Distributions.MethodOfMoments." + DistName;
+                }
+            } 
+            c = Class.forName(DistName);
             Dist=(ContinuousDistribution) c.getConstructor().newInstance();
             Field[] flds = c.getDeclaredFields();
             for (Field f : flds){

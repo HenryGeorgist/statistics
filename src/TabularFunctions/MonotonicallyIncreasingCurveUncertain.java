@@ -10,8 +10,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -19,7 +17,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
@@ -120,37 +117,46 @@ public class MonotonicallyIncreasingCurveUncertain extends TabularFunction imple
         return new MonotonicallyIncreasingCurve(_X,samples);
     }
     @Override
-    public void ReadFromXMLElement(Element ele) {
+    public final void ReadFromXMLElement(Element ele) {
         _X = new ArrayList<>();
         _Y = new ArrayList<>();
         ContinuousDistribution Dist;
         Class<?> c;
         try {
-            c = Class.forName(ele.getAttribute("UncertaintyType"));
-            Dist=(ContinuousDistribution) c.getConstructor().newInstance();
-            Field[] flds = Dist.getClass().getDeclaredFields();
-            for(int i = 1; i < ele.getChildNodes().getLength();i++){
-                Dist=(ContinuousDistribution) c.getConstructor().newInstance();
-                Node N = ele.getChildNodes().item(i);
-                if(N.hasAttributes()){
-                    Element ord = (Element)N;
-                    _X.add(Double.parseDouble(ord.getAttribute("X")));
-                    for(Field f : flds){
-                        switch(f.getType().getName()){
-                            case "double":
-                                f.set(Dist,Double.parseDouble(ord.getAttribute(f.getName())));
-                                break;
-    //                        case "int":
-    //                            f.set(Dist,Integer.parseInt(ele.getAttribute(f.getName())));
-    //                            break;
-                            default:
-                                //throw error?
-                                break;
+            if(ele.hasAttribute("UncertaintyType")){
+                if(ele.getAttribute("UncertaintyType").equals("None")){
+                    // no distribution type called none, this should be a MonotonicallyIncreasingCurve
+                }else{
+                    c = Class.forName(ele.getAttribute("UncertaintyType"));
+                    Dist=(ContinuousDistribution) c.getConstructor().newInstance();
+                    Field[] flds = Dist.getClass().getDeclaredFields();
+                    for(int i = 1; i < ele.getChildNodes().getLength();i++){
+                        Dist=(ContinuousDistribution) c.getConstructor().newInstance();
+                        Node N = ele.getChildNodes().item(i);
+                        if(N.hasAttributes()){
+                            Element ord = (Element)N;
+                            _X.add(Double.parseDouble(ord.getAttribute("X")));
+                            for(Field f : flds){
+                                switch(f.getType().getName()){
+                                    case "double":
+                                        f.set(Dist,Double.parseDouble(ord.getAttribute(f.getName())));
+                                        break;
+            //                        case "int":
+            //                            f.set(Dist,Integer.parseInt(ele.getAttribute(f.getName())));
+            //                            break;
+                                    default:
+                                        //throw error?
+                                        break;
+                                }
+                            }
+                            _Y.add(Dist); 
                         }
-                    }
-                    _Y.add(Dist); 
+                    }                    
                 }
+            }else{
+                // no distribution type, this should be a MonotonicallyIncreasingCurve
             }
+
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(MonotonicallyIncreasingCurveUncertain.class.getName()).log(Level.SEVERE, null, ex);
         }
